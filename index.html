@@ -13,6 +13,11 @@
     <script src="https://unpkg.com/feather-icons"></script>
     <!-- My style -->
     <link rel="stylesheet" href="css/style.css">
+    <!-- AlpineJS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- App -->
+     <script src="src/app.js"></script>
 </head>
 <body>
     
@@ -119,66 +124,67 @@
 
     <div class="row">
         <div class="Menu-card">
-            <img src="img/Menu/1.jpg" alt="espresso" class="Menu-card-img">
-            <h3 class="Menu-card-tittle">-Espresso</h3>
-            <p class="Menu-card-price">IDR 20K</p>
+            <img src="img/Menu/Frappuccino.jpg" alt="Frappuccino" class="Menu-card-img">
+            <h3 class="Menu-card-tittle">Frappuccino</h3>
+            <p class="Menu-card-price">IDR 27K</p>
         </div>
         <div class="Menu-card">
-            <img src="img/Menu/2.jpg" alt="espresso" class="Menu-card-img">
-            <h3 class="Menu-card-tittle">-Americano</h3>
+            <img src="img/Menu/2.jpg" alt="Americano" class="Menu-card-img">
+            <h3 class="Menu-card-tittle">Americano</h3>
             <p class="Menu-card-price">IDR 25K</p>
         </div>
         <div class="Menu-card">
             <img src="img/Menu/3.jpg" alt="espresso" class="Menu-card-img">
-            <h3 class="Menu-card-tittle">-Espresso</h3>
-            <p class="Menu-card-price">IDR 15K</p>
-        </div>
-        <div class="Menu-card">
-            <img src="img/Menu/2.jpg" alt="espresso" class="Menu-card-img">
-            <h3 class="Menu-card-tittle">-Espresso</h3>
-            <p class="Menu-card-price">IDR 22K</p>
-        </div>
-        <div class="Menu-card">
-            <img src="img/Menu/3.jpg" alt="espresso" class="Menu-card-img">
-            <h3 class="Menu-card-tittle">-Espresso</h3>
-            <p class="Menu-card-price">IDR 27K</p>
-        </div>
-        <div class="Menu-card">
-            <img src="img/Menu/2.jpg" alt="espresso" class="Menu-card-img">
-            <h3 class="Menu-card-tittle">-Espresso</h3>
+            <h3 class="Menu-card-tittle">Espresso</h3>
             <p class="Menu-card-price">IDR 19K</p>
         </div>
         <div class="Menu-card">
-            <img src="img/Menu/3.jpg" alt="espresso" class="Menu-card-img">
-            <h3 class="Menu-card-tittle">-Espresso</h3>
-            <p class="Menu-card-price">IDR 24K</p>
+            <img src="img/Menu/affogato.jpg" alt="Affogato" class="Menu-card-img">
+            <h3 class="Menu-card-tittle">Affogato</h3>
+            <p class="Menu-card-price">IDR 30K</p>
         </div>
         <div class="Menu-card">
-            <img src="img/Menu/2.jpg" alt="espresso" class="Menu-card-img">
-            <h3 class="Menu-card-tittle">-Espresso</h3>
-            <p class="Menu-card-price">IDR 15K</p>
+            <img src="img/Menu/Cortado.jpg" alt="Cortado" class="Menu-card-img">
+            <h3 class="Menu-card-tittle">Cortado</h3>
+            <p class="Menu-card-price">IDR 32K</p>
+        </div>
+        <div class="Menu-card">
+            <img src="img/Menu/moca.jpg" alt="Moca" class="Menu-card-img">
+            <h3 class="Menu-card-tittle">Moca</h3>
+            <p class="Menu-card-price">IDR 23K</p>
+        </div>
+        <div class="Menu-card">
+            <img src="img/Menu/Cappuccino.jpg" alt="Cappuccino" class="Menu-card-img">
+            <h3 class="Menu-card-tittle">Cappuccino</h3>
+            <p class="Menu-card-price">IDR 26K</p>
+        </div>
+        <div class="Menu-card">
+            <img src="img/Menu/cold-brew.jpg" alt="Cold Brew" class="Menu-card-img">
+            <h3 class="Menu-card-tittle">Cold Brew</h3>
+            <p class="Menu-card-price">IDR 31K</p>
         </div>
     </div>
 </section>
 <!-- Menu section end -->
 
 <!-- Products section start -->
- <section class="Products" id="Products">
+ <section class="Products" id="Products" x-data="products">
     <h2><span>Produk Unggulan</span> Kami</h2>
     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
         Ullam voluptatem ex cum quas, doloribus tempore!</p>
 
         <div class="row">
+            <template x-for="(item, index) in items" x-key="index">
             <div class="Product-card">
                 <div class="Product-icons">
                     <a href="#"><i data-feather="shopping-cart"></i></a>
                     <a href="#" class="item-detail-button"><i data-feather="eye"></i></a>
                 </div>
                 <div class="product-image">
-                    <img src="img/products/1.jpg" alt="Coffe Beans">
+                    <img :src="`img/products/${item.img}`" :alt="item.name">
                 </div>
                 <div class="Product-content">
-                    <h3>Coffe Beans</h3>
+                    <h3 x-text="item.name"></h3>
                     <div class="Products-stars">
                         <i data-feather="star" class="star-full"></i>
                         <i data-feather="star" class="star-full"></i>
@@ -186,49 +192,10 @@
                         <i data-feather="star" class="star-full"></i>
                         <i data-feather="star"></i>
                     </div>
-                    <div class="Product-price">IDR 30K <span>IDR 55K</span></div>
+                    <div class="Product-price"><span x-text="item.price"></span></div>
                 </div>
             </div>
-            <div class="Product-card">
-                <div class="Product-icons">
-                    <a href="#"><i data-feather="shopping-cart"></i></a>
-                    <a href="#" class="item-detail-button"><i data-feather="eye"></i></a>
-                </div>
-                <div class="product-image">
-                    <img src="img/products/1.jpg" alt="Coffe Beans">
-                </div>
-                <div class="Product-content">
-                    <h3>Coffe Beans</h3>
-                    <div class="Products-stars">
-                        <i data-feather="star" class="star-full"></i>
-                        <i data-feather="star" class="star-full"></i>
-                        <i data-feather="star" class="star-full"></i>
-                        <i data-feather="star" class="star-full"></i>
-                        <i data-feather="star"></i>
-                    </div>
-                    <div class="Product-price">IDR 30K <span>IDR 55K</span></div>
-                </div>
-            </div>
-            <div class="Product-card">
-                <div class="Product-icons">
-                    <a href="#"><i data-feather="shopping-cart"></i></a>
-                    <a href="#" class="item-detail-button"><i data-feather="eye"></i></a>
-                </div>
-                <div class="product-image">
-                    <img src="img/products/1.jpg" alt="Coffe Beans">
-                </div>
-                <div class="Product-content">
-                    <h3>Coffe Beans</h3>
-                    <div class="Products-stars">
-                        <i data-feather="star" class="star-full"></i>
-                        <i data-feather="star" class="star-full"></i>
-                        <i data-feather="star" class="star-full"></i>
-                        <i data-feather="star" class="star-full"></i>
-                        <i data-feather="star" class="star-full"></i>
-                    </div>
-                    <div class="Product-price">IDR 30K <span>IDR 55K</span></div>
-                </div>
-            </div>
+        </template>
         </div>
  </section>
 <!-- Products section end -->
@@ -266,29 +233,6 @@
 
 <!-- Contact section end -->
 
-
-<!-- Footer start -->
- <footer>
-    <div class="social">
-        <a href="#"><i data-feather="instagram"></i></a>
-        <a href="#"><i data-feather="twitter"></i></a>
-        <a href="#"><i data-feather="facebook"></i></a>
-        <a href="#"><i data-feather="tiktok"></i></a>
-    </div>
-
-    <div class="links">
-        <a href="#home">Home</a>
-        <a href="#About">Tentang Kami</a>
-        <a href="#Menu">Menu</a>
-        <a href="#Contact">Kontak</a>
-    </div>
-
-    <div class="credit">
-        <p>Created by <a href="">StevanuDP.</a>. | &copy; 2024</p>
-    </div>
- </footer>
-<!-- Footer end -->
-
 <!-- Modal Box Item Detail Start -->
 
 <div class="modal" id="item-detail-modal">
@@ -316,6 +260,29 @@
 </div>
 
 <!-- Modal Box Item Detail End -->
+
+<!-- Footer start -->
+ <footer>
+    <div class="social">
+        <a href="#"><i data-feather="instagram"></i></a>
+        <a href="#"><i data-feather="twitter"></i></a>
+        <a href="#"><i data-feather="facebook"></i></a>
+        <a href="#"><i data-feather="tiktok"></i></a>
+    </div>
+
+    <div class="links">
+        <a href="#home">Home</a>
+        <a href="#About">Tentang Kami</a>
+        <a href="#Menu">Menu</a>
+        <a href="#Contact">Kontak</a>
+    </div>
+
+    <div class="credit">
+        <p>Created by <a href="">StevanuDP.</a>. | &copy; 2024</p>
+    </div>
+ </footer>
+<!-- Footer end -->
+
 
     <!-- feather icons -->
     <script>
