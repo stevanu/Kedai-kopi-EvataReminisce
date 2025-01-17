@@ -254,14 +254,16 @@ box-shadow: 1px 1px 3px rgba(1, 1, 3, 0.5);
 .about, 
 .Menu,
 .Products,
-.contact {
+.contact,
+.testimoni {
     padding: 6rem 7% 1.4rem;
 }
 
 .about h2, 
 .Menu h2,
 .Products h2,
-.contact h2 {
+.contact h2,
+.testimoni h2 {
     text-align: center;
     font-size: 2.2rem;
     margin-bottom: 3rem;
@@ -270,7 +272,8 @@ box-shadow: 1px 1px 3px rgba(1, 1, 3, 0.5);
 .about h2 span, 
 .Menu h2 span,
 .Products h2 span,
-.contact h2 span {
+.contact h2 span,
+.testimoni h2 span {
     color: var(--primary);
 }
 
@@ -305,11 +308,13 @@ box-shadow: 1px 1px 3px rgba(1, 1, 3, 0.5);
 
 /* Menu section */
 .Menu h2,
-.contact h2 {
+.contact h2,
+.testimoni h2 {
     margin-bottom: 1.3rem;
 }
 .Menu p,
-.contact p {
+.contact p,
+.testimoni p {
     text-align: center;
     max-width: 30rem;
     margin: auto;
@@ -574,6 +579,9 @@ footer .credit a {
     margin-top: 1rem;
     padding: 1rem 1.6rem;
 }
+
+
+/* Testimonial */
 
 
 /* media Queries */
