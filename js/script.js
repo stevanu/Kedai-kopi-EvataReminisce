@@ -44,7 +44,6 @@ document.addEventListener('click', function(e){
     }
 });
 
-
 // Modal Box
 const itemDetailModal = document.querySelector('#item-detail-modal');
 const itemDetailButtons = document.querySelectorAll('.item-detail-button');
@@ -52,6 +51,7 @@ const itemDetailButtons = document.querySelectorAll('.item-detail-button');
 itemDetailButtons.forEach((btn) => {
 
     btn.onclick = (e) => {
+        console.log("");
         itemDetailModal.style.display = 'flex';
         e.preventDefault();
     };
@@ -67,6 +67,7 @@ document.querySelector('.modal .close-icon').onclick = (e) => {
 };
 
 // klik diluar modal
+const modal = document.querySelector('#item-detail-modal');
 window.onclick = (e) => {
     if (e.target == itemDetailModal) {
         itemDetailModal.style.display = 'none';

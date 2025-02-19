@@ -17,7 +17,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <!-- App -->
-     <script src="src/app.js"></script>
+     <script src="src/app.js" async></script>
 </head>
 <body>
     
@@ -72,8 +72,10 @@
         <h4 x-show="!$store.cart.items.length" style="margin-top: 1rem;">Cart is Empty</h4>
         <h4 x-show="$store.cart.items.length">Total : <span x-text="rupiah($store.cart.total)"></span></h4>
 
-        <div class="form-container">
-            <form action="" id="checkoutForm" x-show="$store.cart.items.length">
+        <div class="form-container" x-show="$store.cart.items.length">
+            <form action="" id="checkoutForm">
+                <input type="hidden" name="items" x-model="JSON.stringify($store.cart.items)">
+                <input type="hidden" name="total" x-model="$store.cart.total">
                 <h5>Costumer Detail</h5>
 
                 <label for="name">
@@ -96,7 +98,7 @@
                     <input type="text" name="alamat" id="alamat">
                 </label>
 
-                <button class="checkout-button" type="submit" id="checkout-button"
+                <button class="checkout-button disabled" type="submit" id="checkout-button"
                 value="Checkout">Checkout</button>
             </form>
         </div>
@@ -320,7 +322,21 @@
         Deserunt, eligendi.
 
         <div class="testimoni-container">
-            
+            <div class="modal-content">
+                <img src="" alt="product 1">
+                <div class="testimoni">
+                    <h3>Product 1</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore, 
+                        amet eos similique nisi autem rerum placeat eligendi voluptatibus debitis maiores, 
+                        minima aspernatur, voluptates temporibus explicabo nisi.</p>
+                    <!-- <div class="Products-stars">
+                        <i data-feather="star" class="star-full"></i>
+                         <i data-feather="star" class="star-full"></i>
+                         <i data-feather="star" class="star-full"></i>
+                         <i data-feather="star" class="star-full"></i>
+                         <i data-feather="star" class="star-full"></i> -->
+                     </div>
+                    <div class="Product-price">IDR 30K <span>IDR 55K</span></div>
         </div>
 
 </section>

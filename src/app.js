@@ -72,6 +72,52 @@
     });
  });
 
+//  form validation
+
+const checkoutButton = document.querySelector('.checkout-button');
+checkoutButton.disabled = true;
+
+const form = document.querySelector ('#checkoutForm');
+
+form.addEventListener('keyup', function() {
+    for(let i = 0; i < form.elements.length; i++) {
+        if(form.elements[i].value.length !== 0) {
+            checkoutButton.classList.remove('disabled');
+            checkoutButton.classList.add('disabled');
+        } else {
+            return false;
+        }
+    }
+
+    checkoutButton.disabled = false;
+    checkoutButton.classList.remove('disabled');
+});
+
+// kirim data costumer setelah checkout diklik
+checkoutButton.addEventListener('click', function(e){
+    e.preventDefault();
+    const formData = new FormData(form);
+    const data = new URLSearchParams(formData);
+    const objData = Object.fromEntries(data);
+    const message = formatMessage(objData);
+    window.open('https://wa.me/(your whatsapp number)?text=' + encodeURIComponent(message));
+});
+
+
+// format pesan whatsapp
+const formatMessage = (obj) => {
+    return `Data Costumer
+    Nama: ${obj.name}
+    Email: ${obj.email}
+    No HP: ${obj.phone}
+    Alamat: ${obj.alamat}
+
+Data Pesanan
+${JSON.parse(obj.items).map((item) => `${item.name} (${item.quantity} x ${rupiah(item.total)}) \n`)}    
+TOTAL: ${rupiah(obj.total)}
+Terimakasih.`;
+};
+
 
  // konversi ke Rupiah
 
