@@ -326,9 +326,35 @@
 <section class="testimoni-container">
     <h3>Testimoni Pelanggan</h3>
     <div id="testimoni-list" class="testimoni-list">
-      <!-- Testimoni akan digenerate oleh JavaScript -->
+      <div class="testimoni-item">
+        <img src="https://via.placeholder.com/70" alt="foto pelanggan">
+        <h5>Nama Pelanggan</h5>
+        <div class="rating">⭐⭐⭐⭐</div>
+        <p>"Komentar dari pelanggan."</p>
+        <div class="testimoni-actions">
+          <button class="edit-btn">Edit</button>
+          <button class="delete-btn">Hapus</button>
+        </div>
+      </div>
     </div>
-  
+    <div id="edit-modal" class="edit-modal" style="display:none;">
+        <div class="edit-modal-content">
+          <h4>Edit Testimoni</h4>
+          <input type="text" id="edit-nama" placeholder="Nama Anda" required />
+          <input type="text" id="edit-foto" placeholder="Link Foto (opsional)" />
+          <textarea id="edit-komentar" placeholder="Komentar Anda" required></textarea>
+          <select id="edit-rating">
+            <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+            <option value="4">⭐⭐⭐⭐ (4)</option>
+            <option value="3">⭐⭐⭐ (3)</option>
+            <option value="2">⭐⭐ (2)</option>
+            <option value="1">⭐ (1)</option>
+          </select>
+          <button id="save-edit">Simpan</button>
+          <button id="cancel-edit">Batal</button>
+        </div>
+      </div>
+
     <form id="testimoni-form" class="testimoni-form">
       <h4>Tulis Testimoni Anda</h4>
       <input type="text" id="nama" placeholder="Nama Anda" required />

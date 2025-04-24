@@ -112,53 +112,100 @@ document.addEventListener("DOMContentLoaded", () => {
   
 
 //   Testimoni
-// Fungsi untuk menampilkan rating dalam bentuk bintang
-const getRatingStars = (rating) => '⭐'.repeat(rating);
-
-// Fungsi untuk memuat testimoni dari localStorage
-function loadTestimoni() {
+function getRatingStars(rating) {
+    return '⭐'.repeat(rating);
+  }
+  
+  function loadTestimoni() {
     const data = JSON.parse(localStorage.getItem('testimoni')) || [];
     const list = document.getElementById('testimoni-list');
-    list.innerHTML = '';  // Kosongkan list sebelum menambahkan item baru
-
-    data.forEach(item => {
-        list.innerHTML += `
-            <div class="testimoni-item">
-                <img src="${item.foto || 'https://via.placeholder.com/70'}" alt="foto ${item.nama}">
-                <h5>${item.nama}</h5>
-                <div class="rating">${getRatingStars(item.rating)}</div>
-                <p>"${item.komentar}"</p>
-            </div>
-        `;
+    list.innerHTML = '';
+  
+    data.forEach((item, index) => {
+      const element = document.createElement('div');
+      element.className = 'testimoni-item';
+      element.innerHTML = `
+        <img src="${item.foto || 'https://via.placeholder.com/70'}" alt="foto ${item.nama}">
+        <h5>${item.nama}</h5>
+        <div class="rating">${getRatingStars(item.rating)}</div>
+        <p>"${item.komentar}"</p>
+        <div class="testimoni-actions">
+          <button class="edit-btn" data-index="${index}">Edit</button>
+          <button class="delete-btn" data-index="${index}">Hapus</button>
+        </div>
+      `;
+      list.appendChild(element);
     });
-}
-
-// Event listener untuk menangani pengiriman form
-document.getElementById('testimoni-form').addEventListener('submit', function(e) {
+  
+    // Tambahkan event listener untuk Edit dan Hapus
+    document.querySelectorAll('.edit-btn').forEach(btn => {
+      btn.addEventListener('click', openEditModal);
+    });
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+      btn.addEventListener('click', deleteTestimoni);
+    });
+  }
+  
+  function deleteTestimoni(e) {
+    const index = e.target.dataset.index;
+    const data = JSON.parse(localStorage.getItem('testimoni')) || [];
+    data.splice(index, 1);
+    localStorage.setItem('testimoni', JSON.stringify(data));
+    loadTestimoni();
+  }
+  
+  let editIndex = null;
+  
+  function openEditModal(e) {
+    editIndex = e.target.dataset.index;
+    const data = JSON.parse(localStorage.getItem('testimoni')) || [];
+    const item = data[editIndex];
+  
+    document.getElementById('edit-nama').value = item.nama;
+    document.getElementById('edit-komentar').value = item.komentar;
+    document.getElementById('edit-foto').value = item.foto;
+    document.getElementById('edit-rating').value = item.rating;
+  
+    document.getElementById('edit-modal').style.display = 'block';
+  }
+  
+  document.getElementById('cancel-edit').onclick = () => {
+    document.getElementById('edit-modal').style.display = 'none';
+  };
+  
+  document.getElementById('save-edit').onclick = () => {
+    const data = JSON.parse(localStorage.getItem('testimoni')) || [];
+  
+    data[editIndex] = {
+      nama: document.getElementById('edit-nama').value,
+      komentar: document.getElementById('edit-komentar').value,
+      foto: document.getElementById('edit-foto').value,
+      rating: parseInt(document.getElementById('edit-rating').value)
+    };
+  
+    localStorage.setItem('testimoni', JSON.stringify(data));
+    document.getElementById('edit-modal').style.display = 'none';
+    loadTestimoni();
+  };
+  
+  // Submit Form Testimoni Baru
+  document.getElementById('testimoni-form').addEventListener('submit', function(e) {
     e.preventDefault();
-
+  
     const nama = document.getElementById('nama').value;
     const komentar = document.getElementById('komentar').value;
     const rating = parseInt(document.getElementById('rating').value);
     const foto = document.getElementById('foto').value;
-
+  
     const dataBaru = { nama, komentar, rating, foto };
-    
-    // Ambil data yang sudah ada di localStorage
     const data = JSON.parse(localStorage.getItem('testimoni')) || [];
-    
-    // Menambahkan data baru ke array
     data.unshift(dataBaru);
-    
-    // Simpan kembali ke localStorage
     localStorage.setItem('testimoni', JSON.stringify(data));
-    
-    // Reset form setelah pengiriman
+  
     document.getElementById('testimoni-form').reset();
-    
-    // Memuat ulang testimoni untuk menampilkan data baru
     loadTestimoni();
-});
-
-// Memuat testimoni saat halaman dimuat
-document.addEventListener('DOMContentLoaded', loadTestimoni);
+  });
+  
+  // Load saat halaman dimuat
+  document.addEventListener('DOMContentLoaded', loadTestimoni);
+  
