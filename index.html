@@ -202,7 +202,15 @@
 
         <div class="row">
             <template x-for="(item, index) in items" x-key="index">
-            <div class="Product-card">
+            <div class="Product-card" 
+            :data-name="item.name"
+            :data-desc="item.description"
+            :data-img="item.img"
+            :data-price="item.price">
+            <img id="modal-img" src="" alt="">
+            <h3 id="modal-title"></h3>
+            <p id="modal-desc"></p>
+            <div class="Product-price" id="modal-price"></div>
                 <div class="Product-icons">
                     <a href="#" @click.prevent="$store.cart.add(item)">
                         <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
@@ -315,31 +323,29 @@
 <!-- Contact section end -->
 
 <!-- testimoni start -->
-
-<section id="testimoni" class="testimoni">
-    <h2><span>Testimoni</span> Costumer</h2>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Deserunt, eligendi.
-
-        <div class="testimoni-container">
-            <div class="modal-content">
-                <img src="" alt="product 1">
-                <div class="testimoni">
-                    <h3>Product 1</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore, 
-                        amet eos similique nisi autem rerum placeat eligendi voluptatibus debitis maiores, 
-                        minima aspernatur, voluptates temporibus explicabo nisi.</p>
-                    <!-- <div class="Products-stars">
-                        <i data-feather="star" class="star-full"></i>
-                         <i data-feather="star" class="star-full"></i>
-                         <i data-feather="star" class="star-full"></i>
-                         <i data-feather="star" class="star-full"></i>
-                         <i data-feather="star" class="star-full"></i> -->
-                     </div>
-                    <div class="Product-price">IDR 30K <span>IDR 55K</span></div>
-        </div>
-
-</section>
+<section class="testimoni-container">
+    <h3>Testimoni Pelanggan</h3>
+    <div id="testimoni-list" class="testimoni-list">
+      <!-- Testimoni akan digenerate oleh JavaScript -->
+    </div>
+  
+    <form id="testimoni-form" class="testimoni-form">
+      <h4>Tulis Testimoni Anda</h4>
+      <input type="text" id="nama" placeholder="Nama Anda" required />
+      <input type="text" id="foto" placeholder="Link Foto (opsional)" />
+      <textarea id="komentar" placeholder="Komentar Anda" required></textarea>
+      <select id="rating">
+        <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+        <option value="4">⭐⭐⭐⭐ (4)</option>
+        <option value="3">⭐⭐⭐ (3)</option>
+        <option value="2">⭐⭐ (2)</option>
+        <option value="1">⭐ (1)</option>
+      </select>
+      <button type="submit">Kirim Testimoni</button>
+    </form>
+  </section>
+  
+    
 
 <!-- testimoni end -->
 

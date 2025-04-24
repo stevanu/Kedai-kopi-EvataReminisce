@@ -74,3 +74,91 @@ window.onclick = (e) => {
     }
 
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.querySelector('#item-detail-modal');
+    const modalImg = document.querySelector('#modal-img');
+    const modalTitle = document.querySelector('#modal-title');
+    const modalDesc = document.querySelector('#modal-desc');
+    const modalPrice = document.querySelector('#modal-price');
+  
+    document.querySelectorAll('.item-detail-button').forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+  
+        // Ambil elemen card terdekat
+        const card = this.closest('.Product-card');
+        const name = card.querySelector('h3').innerText;
+        const img = card.querySelector('img').getAttribute('src');
+        const price = card.querySelector('.Product-price span').innerText;
+  
+        // Update isi modal
+        modalImg.setAttribute('src', img);
+        modalTitle.innerText = name;
+        modalDesc.innerText = "Deskripsi produk belum tersedia."; // Update jika ada deskripsi
+        modalPrice.innerText = price;
+  
+        // Tampilkan modal
+        modal.style.display = 'flex';
+      });
+    });
+  
+    // Close modal jika klik tombol X
+    document.querySelector('.close-icon').addEventListener('click', function(e) {
+      e.preventDefault();
+      modal.style.display = 'none';
+    });
+  });
+  
+
+//   Testimoni
+// Fungsi untuk menampilkan rating dalam bentuk bintang
+const getRatingStars = (rating) => '⭐'.repeat(rating);
+
+// Fungsi untuk memuat testimoni dari localStorage
+function loadTestimoni() {
+    const data = JSON.parse(localStorage.getItem('testimoni')) || [];
+    const list = document.getElementById('testimoni-list');
+    list.innerHTML = '';  // Kosongkan list sebelum menambahkan item baru
+
+    data.forEach(item => {
+        list.innerHTML += `
+            <div class="testimoni-item">
+                <img src="${item.foto || 'https://via.placeholder.com/70'}" alt="foto ${item.nama}">
+                <h5>${item.nama}</h5>
+                <div class="rating">${getRatingStars(item.rating)}</div>
+                <p>"${item.komentar}"</p>
+            </div>
+        `;
+    });
+}
+
+// Event listener untuk menangani pengiriman form
+document.getElementById('testimoni-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const nama = document.getElementById('nama').value;
+    const komentar = document.getElementById('komentar').value;
+    const rating = parseInt(document.getElementById('rating').value);
+    const foto = document.getElementById('foto').value;
+
+    const dataBaru = { nama, komentar, rating, foto };
+    
+    // Ambil data yang sudah ada di localStorage
+    const data = JSON.parse(localStorage.getItem('testimoni')) || [];
+    
+    // Menambahkan data baru ke array
+    data.unshift(dataBaru);
+    
+    // Simpan kembali ke localStorage
+    localStorage.setItem('testimoni', JSON.stringify(data));
+    
+    // Reset form setelah pengiriman
+    document.getElementById('testimoni-form').reset();
+    
+    // Memuat ulang testimoni untuk menampilkan data baru
+    loadTestimoni();
+});
+
+// Memuat testimoni saat halaman dimuat
+document.addEventListener('DOMContentLoaded', loadTestimoni);

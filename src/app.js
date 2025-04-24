@@ -80,17 +80,16 @@ checkoutButton.disabled = true;
 const form = document.querySelector ('#checkoutForm');
 
 form.addEventListener('keyup', function() {
-    for(let i = 0; i < form.elements.length; i++) {
-        if(form.elements[i].value.length !== 0) {
-            checkoutButton.classList.remove('disabled');
-            checkoutButton.classList.add('disabled');
-        } else {
-            return false;
+    let filled = true;
+    for (let i = 0; i < form.elements.length; i++) {
+        if (form.elements[i].value.trim().length === 0) {
+            filled = false;
+            break;
         }
     }
 
-    checkoutButton.disabled = false;
-    checkoutButton.classList.remove('disabled');
+    checkoutButton.disabled = !filled;
+    checkoutButton.classList.toggle('disabled', !filled);
 });
 
 // kirim data costumer setelah checkout diklik
