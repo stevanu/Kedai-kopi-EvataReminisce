@@ -3,7 +3,6 @@
 [![HTML](https://img.shields.io/badge/HTML-5-orange?logo=html5)](https://developer.mozilla.org/docs/Web/HTML)
 [![CSS](https://img.shields.io/badge/CSS-3-blue?logo=css3)](https://developer.mozilla.org/docs/Web/CSS)
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow?logo=javascript)](https://developer.mozilla.org/docs/Web/JavaScript)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 🚀 **Kedai-kopi-EvataReminisce** is a simple static website for a fictional coffee shop, built using **HTML, CSS, and vanilla JavaScript**.  
 This project was created to showcase a minimal landing page for a coffee shop with custom styles and light animations.
